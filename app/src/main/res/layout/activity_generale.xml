@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_margin="10dp"
+    tools:context=".generale">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignStart="@+id/button2"
+        app:srcCompat="@drawable/stb2"
+        android:id="@+id/imageView2" />
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LA BANQUE EN BREF"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="5dp"
+        android:onClick="bank"
+        />
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simulation de crédit"
+        android:layout_marginTop="5dp"
+        android:onClick="simcredit"
+        android:layout_below="@+id/button7"
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simulation de placement"
+        android:layout_below="@+id/button5"
+        android:layout_marginTop="5dp"
+        android:onClick="simplacement"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:text="COURS DE CHANGE"
+        android:layout_marginTop="5dp"
+        android:onClick="cours"
+        />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONVERTISSEUR DE DEVISES"
+        android:layout_marginTop="5dp"
+        android:onClick="convert"
+        android:layout_below="@+id/button3"
+        />
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rapports annuels"
+        android:layout_marginTop="5dp"
+        android:onClick="rapport"
+        android:layout_below="@+id/button4"
+        />
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:layout_marginTop="5dp"
+        android:onClick="exit"
+        android:layout_below="@+id/button6"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_margin="10dp"
+    tools:context="com.example.rjh.mootaz_pfe.Principale">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button2"
+        app:srcCompat="@drawable/stb2"
+        android:id="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Espace Admin"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="10dp"
+        android:onClick="adminLogin"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:text="Espace Actionnaire"
+        android:layout_marginTop="10dp"
+        android:onClick="actLogin"
+        />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Espace User"
+        android:layout_marginTop="10dp"
+        android:onClick="userLogin"
+        android:layout_below="@+id/button3"
+        />
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:layout_marginTop="10dp"
+        android:onClick="exit"
+        android:layout_below="@+id/button4"
+        />
+
+
+    </RelativeLayout>
