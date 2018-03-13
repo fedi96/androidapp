@@ -33,7 +33,10 @@
         <activity android:name=".generale" />
         <activity android:name=".addnew" />
         <activity android:name=".userhome" />
-        <activity android:name=".new_q"></activity>
+        <activity android:name=".acthome" />
+        <activity android:name=".new_q" />
+        <activity android:name=".new_rep" />
+        <activity android:name=".modify"></activity>
     </application>
 
 </manifest>

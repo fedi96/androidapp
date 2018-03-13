@@ -48,6 +48,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
         Home.this.finish();
     }
+    public void modify(View arg0){
+        Intent intent = new Intent(Home.this,modify.class);
+        startActivity(intent);
+        Home.this.finish();
+    }
 
     public void retour(View arg0){
         setContentView(R.layout.activity_home);

@@ -21,6 +21,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class login_act extends AppCompatActivity {
 
@@ -47,7 +49,11 @@ public class login_act extends AppCompatActivity {
         startActivity(intent);
         login_act.this.finish();
     }
-
+    public void retour(View arg0){
+        Intent intent = new Intent(login_act.this, Principale.class);
+        startActivity(intent);
+        login_act.this.finish();
+    }
     // Triggers when LOGIN Button clicked
     public void checkLogin(View arg0) {
 
@@ -56,7 +62,23 @@ public class login_act extends AppCompatActivity {
         final String password = etPassword.getText().toString();
         final String role = "actionnaire";
         // Initialize  AsyncLogin() class with email and password
-        new AsyncLogin().execute(email, password,role);
+
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher em = p.matcher(email);
+        if (email.isEmpty() || password.isEmpty()){
+            Toast.makeText(login_act.this, "Email ou mot de passe est vide",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(!em.matches()) {
+
+            Toast.makeText(login_act.this, "Invalid Format d'email",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            new login_act.AsyncLogin().execute(email,password,role);
+        }
 
     }
 

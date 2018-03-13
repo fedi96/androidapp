@@ -20,6 +20,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class login extends AppCompatActivity {
@@ -47,11 +49,32 @@ public class login extends AppCompatActivity {
         final String password = etPassword.getText().toString();
         final String role = "admin";
         // Initialize  AsyncLogin() class with email and password
-        new AsyncLogin().execute(email,password,role);
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher em = p.matcher(email);
+        if (email.isEmpty() || password.isEmpty()){
+            Toast.makeText(login.this, "Email ou mot de passe est vide",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(!em.matches()) {
+
+            Toast.makeText(login.this, "Invalid Format d'email",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            new login.AsyncLogin().execute(email,password,role);
+        }
+
 
     }
     public void newadmin(View arg0){
         Intent intent = new Intent(login.this, new_admin.class);
+        startActivity(intent);
+        login.this.finish();
+    }
+    public void retour(View arg0){
+        Intent intent = new Intent(login.this, Principale.class);
         startActivity(intent);
         login.this.finish();
     }
@@ -165,13 +188,11 @@ public class login extends AppCompatActivity {
                 /* Here launching another activity when login successful. If you persist login state
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.
                  */
-                final String mmail = etEmail.getText().toString();
-                Intent intent = new Intent(login.this,Home.class).putExtra(mail,mmail);
+                Intent intent = new Intent(login.this,Home.class);
                 startActivity(intent);
                 login.this.finish();
 
             }else if (result.equalsIgnoreCase("false")){
-
                 // If username and password does not match display a error message
                 Toast.makeText(login.this, "Invalid email or password", Toast.LENGTH_LONG).show();
 

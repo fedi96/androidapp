@@ -56,6 +56,13 @@
         android:layout_marginTop="10dp"
         android:onClick="newadmin"/>
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retour"
+        android:id="@+id/button6"
+        android:layout_below="@+id/button5"
+        android:layout_marginTop="10dp"
+        android:onClick="retour"/>
 
 </RelativeLayout>

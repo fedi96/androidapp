@@ -42,11 +42,20 @@
         android:onClick="add"
         />
     <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modify User"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/button4"
+        android:onClick="modify"
+        />
+    <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="exit"
-        android:layout_below="@+id/button4"
+        android:layout_below="@+id/button5"
         android:text="exit" />
 
 </RelativeLayout>

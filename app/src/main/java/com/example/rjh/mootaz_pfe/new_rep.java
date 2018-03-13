@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -20,69 +21,44 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class login_user extends AppCompatActivity {
+public class new_rep extends AppCompatActivity {
 
     // CONNECTION_TIMEOUT and READ_TIMEOUT are in milliseconds
 
     public static final int CONNECTION_TIMEOUT=10000;
     public static final int READ_TIMEOUT=15000;
-    private EditText etEmail;
-    private EditText etPassword;
+    private EditText etq;
+    private EditText etuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_user);
+        setContentView(R.layout.activity_new_rep);
 
         // Get Reference to variables
-        etEmail = findViewById(R.id.email);
-        etPassword = findViewById(R.id.password);
+        etq = findViewById(R.id.question);
+        etuser = findViewById(R.id.user);
 
     }
 
     // Triggers when LOGIN Button clicked
-    public void checkLogin(View arg0) {
+    public void submit(View arg0) {
 
         // Get text from email and passord field
-        final String email = etEmail.getText().toString();
-        final String password = etPassword.getText().toString();
-        final String role = "user";
+        final String ques = etq.getText().toString();
+        final String user = etuser.getText().toString();
+
+
         // Initialize  AsyncLogin() class with email and password
-        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
-        Matcher em = p.matcher(email);
-        if (email.isEmpty() || password.isEmpty()){
-            Toast.makeText(login_user.this, "Email ou mot de passe est vide",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else if(!em.matches()) {
-
-            Toast.makeText(login_user.this, "Invalid Format d'email",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else{
-            new login_user.AsyncLogin().execute(email,password,role);
-        }
+        new new_rep.Asyncregister().execute(user,ques);
 
     }
-    public void newuser(View arg0){
-        Intent intent = new Intent(login_user.this, new_user.class);
-        startActivity(intent);
-        login_user.this.finish();
-    }
-    public void retour(View arg0){
-        Intent intent = new Intent(login_user.this, Principale.class);
-        startActivity(intent);
-        login_user.this.finish();
-    }
+
     @SuppressLint("StaticFieldLeak")
-    private class AsyncLogin extends AsyncTask<String, String, String>
+    private class Asyncregister extends AsyncTask<String, String, String>
     {
-        ProgressDialog pdLoading = new ProgressDialog(login_user.this);
+        ProgressDialog pdLoading = new ProgressDialog(new_rep.this);
         HttpURLConnection conn;
         URL url = null;
 
@@ -101,7 +77,7 @@ public class login_user extends AppCompatActivity {
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://10.0.2.2/mootaz_pfe/login.inc.php");
+                url = new URL("http://10.0.2.2/mootaz_pfe/addrep.inc.php");
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -120,9 +96,8 @@ public class login_user extends AppCompatActivity {
 
                 // Append parameters to URL
                 Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("user", params[0])
-                        .appendQueryParameter("pass", params[1])
-                        .appendQueryParameter("role", params[2]);
+                        .appendQueryParameter("id", params[0])
+                        .appendQueryParameter("rep", params[1]);
                 String query = builder.build().getEncodedQuery();
 
                 // Open connection for sending data
@@ -188,21 +163,22 @@ public class login_user extends AppCompatActivity {
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.
                  */
 
-                Intent intent = new Intent(login_user.this,userhome.class);
+                Intent intent = new Intent(new_rep.this,userhome.class);
                 startActivity(intent);
-                login_user.this.finish();
+                new_rep.this.finish();
 
             }else if (result.equalsIgnoreCase("false")){
 
                 // If username and password does not match display a error message
-                Toast.makeText(login_user.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+                Toast.makeText(new_rep.this, "Invalid", Toast.LENGTH_LONG).show();
 
             } else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful")) {
 
-                Toast.makeText(login_user.this, "OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
+                Toast.makeText(new_rep.this, "OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
 
             }
         }
 
     }
 }
+

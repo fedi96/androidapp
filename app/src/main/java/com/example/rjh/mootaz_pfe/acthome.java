@@ -1,26 +1,26 @@
 package com.example.rjh.mootaz_pfe;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 
-public class userhome extends AppCompatActivity {
+public class acthome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userhome);
+        setContentView(R.layout.activity_acthome);
     }
     public void retour(View arg0){
-        setContentView(R.layout.activity_userhome);
+        setContentView(R.layout.activity_acthome);
     }
     public void ajques(View arg0){
-        Intent intent = new Intent(com.example.rjh.mootaz_pfe.userhome.this,new_rep.class);
+        Intent intent = new Intent(acthome.this,new_q.class);
         startActivity(intent);
-        userhome.this.finish();
+        acthome.this.finish();
     }
     public void question(View arg0){
         setContentView(R.layout.generale);
@@ -34,10 +34,9 @@ public class userhome extends AppCompatActivity {
         WebView myWebView=findViewById(R.id.wbvw);
         myWebView.reload();
     }
-    public void exit(View arg0){
-        android.os.Process.killProcess(android.os.Process.myPid());
-        super.onDestroy();
-        finish();
-        System.exit(0);
+    public void retours(View arg0){
+        Intent intent = new Intent(acthome.this, generale.class);
+        startActivity(intent);
+        acthome.this.finish();
     }
 }

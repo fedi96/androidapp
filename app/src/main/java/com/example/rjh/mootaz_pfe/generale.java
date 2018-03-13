@@ -77,4 +77,10 @@ public class generale extends AppCompatActivity {
         finish();
         System.exit(0);
     }
+    public void avis(View arg0){
+        Intent intent = new Intent(generale.this, acthome.class);
+        // If you just use this that is not a valid context. Use ActivityName.this
+        startActivity(intent);
+        generale.this.finish();
+    }
 }

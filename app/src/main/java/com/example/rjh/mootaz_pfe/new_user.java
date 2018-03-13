@@ -20,6 +20,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class new_user extends AppCompatActivity {
 
@@ -54,17 +56,33 @@ public class new_user extends AppCompatActivity {
         final String nom = etnom.getText().toString();
         final String user = etuser.getText().toString();
         String role="user";
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher em = p.matcher(email);
+        if (email.isEmpty() || password.isEmpty() || user.isEmpty() || nom.isEmpty()){
+            Toast.makeText(new_user.this, "Email , nom , user ou mot de passe est vide",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(!em.matches()) {
 
-        // Initialize  AsyncLogin() class with email and password
-        new new_user.Asyncregister().execute(email,password,user,nom,role);
-
+            Toast.makeText(new_user.this, "Invalid Format d'email",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            new new_user.Asyncregister().execute(email,password,user,nom,role);
+        }
     }
     public void login(View arg0){
         Intent intent = new Intent(new_user.this, login_user.class);
         startActivity(intent);
         new_user.this.finish();
     }
-
+    public void retour(View arg0){
+        Intent intent = new Intent(new_user.this, login_user.class);
+        startActivity(intent);
+        new_user.this.finish();
+    }
     @SuppressLint("StaticFieldLeak")
     private class Asyncregister extends AsyncTask<String, String, String>
     {
@@ -172,23 +190,19 @@ public class new_user extends AppCompatActivity {
 
             if(result.equalsIgnoreCase("true"))
             {
-                /* Here launching another activity when login successful. If you persist login state
-                use sharedPreferences of Android. and logout button to clear sharedPreferences.
-                 */
-
                 Intent intent = new Intent(new_user.this,userhome.class);
                 startActivity(intent);
                 new_user.this.finish();
-
+            }else if (result.equalsIgnoreCase("mail")){
+                Toast.makeText(new_user.this, "Email déja utilisé", Toast.LENGTH_LONG).show();
+            }else if (result.equalsIgnoreCase("user")){
+                Toast.makeText(new_user.this, "User déja utilisé", Toast.LENGTH_LONG).show();
+            }else if (result.equalsIgnoreCase("nom")){
+                Toast.makeText(new_user.this, "Nom déja utilisé", Toast.LENGTH_LONG).show();
             }else if (result.equalsIgnoreCase("false")){
-
-                // If username and password does not match display a error message
                 Toast.makeText(new_user.this, "Invalid email or password", Toast.LENGTH_LONG).show();
-
             } else if (result.equalsIgnoreCase("exception") || result.equalsIgnoreCase("unsuccessful")) {
-
                 Toast.makeText(new_user.this, "OOPs! Something went wrong. Connection Problem.", Toast.LENGTH_LONG).show();
-
             }
         }
 

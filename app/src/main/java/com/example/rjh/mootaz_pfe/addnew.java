@@ -20,6 +20,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class addnew extends AppCompatActivity {
 
@@ -56,12 +58,28 @@ public class addnew extends AppCompatActivity {
         final String nom = etnom.getText().toString();
         final String user = etuser.getText().toString();
         String role=etrole.getText().toString();;
-
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher em = p.matcher(email);
+        if (email.isEmpty() || password.isEmpty() || user.isEmpty() || role.isEmpty() || nom.isEmpty()){
+            Toast.makeText(addnew.this, "Email , nom , user ou mot de passe est vide",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(!em.matches()) {
+            Toast.makeText(addnew.this, "Invalid Format d'email",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            new addnew.Asyncregister().execute(email,password,user,nom,role);
+        }
         // Initialize  AsyncLogin() class with email and password
-        new addnew.Asyncregister().execute(email,password,user,nom,role);
 
     }
-
+    public void retour(View arg0){
+        Intent intent = new Intent(addnew.this,Home.class);
+        startActivity(intent);
+        addnew.this.finish();}
     @SuppressLint("StaticFieldLeak")
     private class Asyncregister extends AsyncTask<String, String, String>
     {
